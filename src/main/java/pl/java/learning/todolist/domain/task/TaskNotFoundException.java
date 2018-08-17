@@ -1,12 +1,13 @@
 package pl.java.learning.todolist.domain.task;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import pl.java.learning.todolist.infrastructure.error.BusinessErrorCode;
+import pl.java.learning.todolist.infrastructure.error.CommonBusinessException;
 
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public class TaskNotFoundException extends RuntimeException {
+public class TaskNotFoundException extends CommonBusinessException {
 
-    public TaskNotFoundException(String exception) {
-        super(exception);
-    }
+  private static final String MESSAGE = "Task with id: %s not found";
+
+  public TaskNotFoundException(Long id) {
+    super(BusinessErrorCode.ENTITY_NOT_FOUND, String.format(MESSAGE, id));
+  }
 }

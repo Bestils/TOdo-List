@@ -1,0 +1,1 @@
+insert into task values (1, 0, 'Task1', 'description1', 1);
