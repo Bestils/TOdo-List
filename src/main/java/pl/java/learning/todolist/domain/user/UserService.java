@@ -1,43 +1,29 @@
 package pl.java.learning.todolist.domain.user;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
-public class UserService  {
+@RequiredArgsConstructor
+public class UserService {
 
-    private final UserRepository userRepository;
+  private final UserRepository userRepository;
 
+  public User getById(Long id) {
+    return userRepository.findById(id)
+        .orElseThrow(() -> new UserNotFoundException(id));
+  }
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+  public void deleteById(Long id) {
+    userRepository.deleteById(id);
+  }
 
+  public void saveOrUpdateUser(User User) {
+    userRepository.save(User);
+  }
 
-
-
-    public User getById(Long id) {
-        return userRepository.findById(id).get();
-
-    }
-
-
-    public void deleteById(Long id) {
-        userRepository.deleteById(id);
-
-    }
-
-
-    public void saveOrUpdateUser(User User) {
-        userRepository.save(User);
-
-    }
-    public List<User> findAll(){
-        return userRepository.findAll();
-    }
-
+  public List<User> findAll() {
+    return userRepository.findAll();
+  }
 }

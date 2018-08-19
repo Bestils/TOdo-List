@@ -3,7 +3,6 @@ package pl.java.learning.todolist.infrastructure.web;
 import lombok.extern.slf4j.Slf4j;
 
 
-@Slf4j
 public class WebUtils {
   private static final String REDIRECT = "redirect:";
   private static final String FORWARD = "forward:";
