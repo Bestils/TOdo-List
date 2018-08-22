@@ -1,15 +1,12 @@
 package pl.java.learning.todolist.domain.task;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import pl.java.learning.todolist.domain.category.Category;
 import pl.java.learning.todolist.infrastructure.persistence.BaseEntity;
 
 @Entity
@@ -17,8 +14,13 @@ import pl.java.learning.todolist.infrastructure.persistence.BaseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@ToString(exclude = {"category"})
 public class Task extends BaseEntity {
   private String name;
   private String description;
   private Integer priority;
+
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  private Category category;
 }
