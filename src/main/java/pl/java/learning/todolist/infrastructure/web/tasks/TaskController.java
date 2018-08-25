@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.java.learning.todolist.domain.category.CategoryService;
 import pl.java.learning.todolist.domain.task.Task;
 import pl.java.learning.todolist.domain.task.TaskService;
 
@@ -28,9 +29,11 @@ import pl.java.learning.todolist.domain.task.TaskService;
 public class TaskController {
 
   private final TaskService taskService;
+  private final CategoryService categoryService;
 
   @GetMapping
-  public String findAll(@ModelAttribute Task task) {
+  public String findAll(Model model) {
+    model.addAttribute("categories", categoryService.findAll());
     return TASKS_ALL;
   }
 
