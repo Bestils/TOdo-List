@@ -22,6 +22,10 @@ public class TaskService {
         .orElseThrow(() -> new TaskNotFoundException(id));
   }
 
+  public List<Task> findByStatus(Boolean status) {
+    return taskRepository.findByFinished(status);
+  }
+
   public Task save(Task task) {
     return taskRepository.save(task);
   }
