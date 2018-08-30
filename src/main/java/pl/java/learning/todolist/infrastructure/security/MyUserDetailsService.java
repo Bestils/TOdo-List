@@ -1,11 +1,13 @@
-package pl.java.learning.todolist.domain.user;
+package pl.java.learning.todolist.infrastructure.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.java.learning.todolist.domain.user.User;
+import pl.java.learning.todolist.domain.user.UserRepository;
+import pl.java.learning.todolist.infrastructure.security.MyUserPrincipal;
 
 @Service
 @RequiredArgsConstructor

@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.java.learning.todolist.domain.user.MyUserDetailsService;
+import pl.java.learning.todolist.infrastructure.security.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity

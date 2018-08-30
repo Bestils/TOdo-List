@@ -1,17 +1,19 @@
-package pl.java.learning.todolist.domain.user;
+package pl.java.learning.todolist.infrastructure.security;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.java.learning.todolist.domain.user.User;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MyUserPrincipal implements UserDetails {
 
-  private User user;
+  private final User user;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -19,7 +21,7 @@ public class MyUserPrincipal implements UserDetails {
     return authorities;
   }
 
-  public Long getUser() {
+  public Long getUserId() {
     return user.getId();
   }
 

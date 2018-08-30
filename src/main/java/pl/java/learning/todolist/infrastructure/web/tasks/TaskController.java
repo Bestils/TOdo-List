@@ -8,8 +8,6 @@ import static pl.java.learning.todolist.infrastructure.web.tasks.TaskViews.TASK_
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.java.learning.todolist.domain.category.CategoryService;
 import pl.java.learning.todolist.domain.task.Task;
 import pl.java.learning.todolist.domain.task.TaskService;
-import pl.java.learning.todolist.domain.user.User;
+import pl.java.learning.todolist.infrastructure.security.IdProvider;
 
 
 @Slf4j
@@ -38,12 +36,6 @@ public class TaskController {
   public String findAll(Model model) {
     model.addAttribute("categories", categoryService.findAll());
     model.addAttribute("task", new Task());
-
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String name = authentication.getName();
-
-    model.addAttribute("user", name);
-
     return TASKS_ALL;
   }
 

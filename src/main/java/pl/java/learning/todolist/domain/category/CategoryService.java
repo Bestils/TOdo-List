@@ -34,12 +34,13 @@ public class CategoryService {
   public void deleteById(Long id) {
     categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
 
-    //It's not possible delete category about id equal 1 - Uncategorized
-    categoryRepository.findById(id).
-          filter(category -> id != 1).
-          orElseThrow(() -> new CategoryNotFoundException(id)).
-          getTasks().
-          forEach(task -> task.setCategory(categoryRepository.findById(new Long(1)).get()));
+
+    //todo to jest do poprawy
+    categoryRepository.findById(id)
+          .filter(category -> id != 1)
+          .orElseThrow(() -> new CategoryNotFoundException(id))
+          .getTasks()
+          .forEach(task -> task.setCategory(categoryRepository.findById(1L).get()));
 
     categoryRepository.deleteById(id);
   }

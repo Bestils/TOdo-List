@@ -10,6 +10,7 @@ public enum TechnicalErrorCode {
 
   GENERAL_ERROR("General system error",HttpStatus.INTERNAL_SERVER_ERROR),
   NOT_IMPLEMENTED("This feature is not implemented", HttpStatus.METHOD_NOT_ALLOWED),
+  NOT_AUTHENTICATED("User is not authenticated", HttpStatus.UNAUTHORIZED),
   ENTITY_NOT_FOUND("Entity with given id not found",HttpStatus.NOT_FOUND);
 
   private final String message;
