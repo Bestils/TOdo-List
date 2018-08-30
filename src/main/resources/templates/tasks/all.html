@@ -7,8 +7,14 @@
 </head>
 <body>
 
-  <h1 class="text-center">My To-Do List</h1>
   <div class="container">
+
+    <div class="text-center">
+      <h1>My To-Do List</h1>
+      <h2>Hello [[${user}]] </h2>
+      <a class="btn btn-info" role="button" th:href="@{/logout}">Logout</a>
+    </div>
+
     <div class="row mt-1">
       <div th:each="category : ${categories}" class="col-sm">
           <h2 th:text="${category.name}" class="bg-primary text-white text-center p-1" />

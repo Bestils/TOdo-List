@@ -2,7 +2,9 @@ package pl.java.learning.todolist.domain.user;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import pl.java.learning.todolist.domain.task.Task;
 
 @Service
 @RequiredArgsConstructor

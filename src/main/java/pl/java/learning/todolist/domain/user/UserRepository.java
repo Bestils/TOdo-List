@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends
     pl.java.learning.todolist.infrastructure.persistence.Repository<User> {
 
+  User findByLogin(String login);
 }

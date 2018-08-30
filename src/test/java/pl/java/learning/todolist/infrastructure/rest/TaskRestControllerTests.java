@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import pl.java.learning.todolist.domain.TestDbVO.Existing;
 import pl.java.learning.todolist.domain.TestDbVO.NonExisting;
 import pl.java.learning.todolist.infrastructure.AbstractIntegrationTest;
