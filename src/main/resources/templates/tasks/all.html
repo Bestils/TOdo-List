@@ -3,9 +3,7 @@
 <head>
   <title>Task List</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="http://cdn.jsdelivr.net/webjars/bootstrap/4.1.3/css/bootstrap.min.css"
-                th:href="@{/webjars/bootstrap/4.1.3/css/bootstrap.min.css}"
-                rel="stylesheet" media="screen" />
+  <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" media="screen" />
 </head>
 <body>
 
@@ -24,6 +22,68 @@
       </div>
     </div>
   </div>
+
+  <div class="container">
+  <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+      Add task
+    </button>
+
+    <div class="myForm">
+      <form th:action="@{/tasks}" method="post" th:object="${task}">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add task</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" th:field="*{name}" />
+                </div>
+
+                <div class="form-group">
+                  <label for="description" class="col-form-label">Description</label>
+                  <input type="text" class="form-control" id="description" name="description" th:field="*{description}" />
+                </div>
+
+                <div class="form-group">
+                  <label for="priority" class="col-form-label">Priority</label>
+                  <input type="number" min="0" class="form-control" id="priority" name="priority" th:field="*{priority}" />
+                </div>
+
+                <div class="form-group">
+                  <label for="category.id" class="col-form-label">Category</label>
+                  <select th:field="*{category}">
+                    <option th:each="category : ${categories}"
+                       th:value="${category.id}"
+                       th:text="${category.name}"/>
+                  </select>
+                </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                <input type="submit" class="btn btn-primary" value="Submit" />
+              </div>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+  </div>
+
+  <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
+  <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
 </body>
 </html>

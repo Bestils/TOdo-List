@@ -19,7 +19,7 @@ public class Task extends BaseEntity {
   private String name;
   private String description;
   private Integer priority;
-  private Boolean finished;
+  private Boolean finished = false;
 
   @ManyToOne
   @JoinColumn(name = "category_id")

@@ -2,6 +2,7 @@ package pl.java.learning.todolist.infrastructure.persistence;
 
 import java.util.Objects;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Version;
@@ -12,7 +13,7 @@ import lombok.Data;
 @MappedSuperclass
 public class BaseEntity {
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
   @Version

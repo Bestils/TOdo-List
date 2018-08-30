@@ -34,6 +34,7 @@ public class TaskController {
   @GetMapping
   public String findAll(Model model) {
     model.addAttribute("categories", categoryService.findAll());
+    model.addAttribute("task", new Task());
     return TASKS_ALL;
   }
 
@@ -54,10 +55,8 @@ public class TaskController {
     if (bindingResult.hasErrors()) {
       return TASK_EDIT_FORM;
     }
-
     taskService.save(task);
-
-    return redirectTo(TASKS_ALL);
+    return redirectTo("/tasks");
   }
 
   @PostMapping("update")

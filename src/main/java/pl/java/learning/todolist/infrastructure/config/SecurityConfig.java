@@ -37,15 +37,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(final HttpSecurity http) throws Exception {
     http
         .csrf().disable()
-        .headers().frameOptions().disable()
+          .headers().frameOptions().disable()
         .and()
-        .authorizeRequests()
-        .antMatchers("/login*").anonymous()
-        .anyRequest().authenticated()
+          .authorizeRequests()
+          .antMatchers("/login*").anonymous()
+          .antMatchers("/webjars/**").permitAll()
+          .anyRequest().authenticated()
         .and()
-        .formLogin()
+          .formLogin()
+          .successForwardUrl("/tasks")
         .and()
-        .logout();
+          .logout();
   }
 
   @Bean
