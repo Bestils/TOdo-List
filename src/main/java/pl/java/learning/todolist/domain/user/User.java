@@ -4,11 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
 import pl.java.learning.todolist.domain.category.Category;
 import pl.java.learning.todolist.domain.task.Task;
 import pl.java.learning.todolist.infrastructure.persistence.BaseEntity;
@@ -31,4 +37,29 @@ public class User extends BaseEntity {
   @JsonIgnore
   @OneToMany(mappedBy = "user")
   private List<Category> category;
+
+  @NotNull(message = "Login  is required")
+  @NotBlank(message = "Login is required")
+  @Pattern(regexp = "[A-Za-z\\d]{5,255}$", message = "Login has invalid characters")
+  public String getLogin() {
+    return login;
+  }
+  @NotNull(message = "Password is required")
+  @NotBlank(message = "Password is required")
+  @Pattern(regexp ="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}" , message = "Password  has invalid characters")
+  public String getPassword() {
+    return password;
+  }
+  @NotNull(message="Email Address is required")
+  @NotBlank(message="Email Address is required")
+  @Email(message = "Email address has invalid format")
+  public String getEmail() {
+    return email;
+  }
+
+
+  public void setLogin(String login) {
+    this.login = login;
+  }
+
 }
