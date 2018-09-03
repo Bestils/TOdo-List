@@ -5,6 +5,8 @@ import static pl.java.learning.todolist.infrastructure.web.tasks.TaskViews.TASKS
 import static pl.java.learning.todolist.infrastructure.web.tasks.TaskViews.TASK_DETAILS;
 import static pl.java.learning.todolist.infrastructure.web.tasks.TaskViews.TASK_EDIT_FORM;
 
+import java.security.Principal;
+import java.util.Optional;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.java.learning.todolist.domain.category.CategoryService;
 import pl.java.learning.todolist.domain.task.Task;
 import pl.java.learning.todolist.domain.task.TaskService;
+import pl.java.learning.todolist.domain.user.User;
+import pl.java.learning.todolist.domain.user.UserService;
 import pl.java.learning.todolist.infrastructure.security.IdProvider;
+import pl.java.learning.todolist.infrastructure.security.MyUserDetailsService;
 
 
 @Slf4j
@@ -31,11 +36,15 @@ public class TaskController {
 
   private final TaskService taskService;
   private final CategoryService categoryService;
+  private final UserService userService;
+  private final IdProvider idProvider;
 
   @GetMapping
   public String findAll(Model model) {
-    model.addAttribute("categories", categoryService.findAll());
+
+    model.addAttribute("categories", categoryService.findCategoriesByUserId(idProvider.getCurrentUserId()));
     model.addAttribute("task", new Task());
+
     return TASKS_ALL;
   }
 
@@ -54,8 +63,9 @@ public class TaskController {
   @PostMapping
   public String processCreateForm(@ModelAttribute @Valid Task task, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
-      return TASK_EDIT_FORM;
+      return redirectTo("/tasks");
     }
+    task.setUser(userService.getById(idProvider.getCurrentUserId()));
     taskService.save(task);
     return redirectTo("/tasks");
   }

@@ -1,5 +1,7 @@
 package pl.java.learning.todolist.domain.task;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -17,9 +19,17 @@ import pl.java.learning.todolist.infrastructure.persistence.BaseEntity;
 @EqualsAndHashCode(callSuper = true)
 @ToString(exclude = {"category", "user"})
 public class Task extends BaseEntity {
+
+  @NotNull
+  @Size(min = 3)
   private String name;
+
+  @NotNull
+  @Size(min = 5)
   private String description;
+
   private Integer priority;
+
   private Boolean finished = false;
 
   @ManyToOne

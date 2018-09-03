@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class IdProvider {
 
-
   public Long getCurrentUserId() {
     MyUserPrincipal principal = (MyUserPrincipal) Optional
         .ofNullable(SecurityContextHolder.getContext()

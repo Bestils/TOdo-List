@@ -18,6 +18,10 @@ public class CategoryService {
     return categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
   }
 
+  public List<Category> findCategoriesByUserId(Long id) {
+    return categoryRepository.findCategoriesByUserId(id);
+  }
+
   public Category save(Category category) {
     return categoryRepository.save(category);
   }
