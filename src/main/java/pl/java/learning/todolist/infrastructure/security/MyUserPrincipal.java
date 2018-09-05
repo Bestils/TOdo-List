@@ -1,12 +1,10 @@
 package pl.java.learning.todolist.infrastructure.security;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import lombok.AllArgsConstructor;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.java.learning.todolist.domain.user.User;
 
@@ -17,8 +15,7 @@ public class MyUserPrincipal implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    final List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("USER"));
-    return authorities;
+    return user.getRoles();
   }
 
   public Long getUserId() {

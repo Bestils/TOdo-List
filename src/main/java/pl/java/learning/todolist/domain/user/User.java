@@ -2,7 +2,13 @@ package pl.java.learning.todolist.domain.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -14,8 +20,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 import pl.java.learning.todolist.domain.category.Category;
+import pl.java.learning.todolist.domain.role.Role;
 import pl.java.learning.todolist.domain.task.Task;
 import pl.java.learning.todolist.infrastructure.persistence.BaseEntity;
 
@@ -24,7 +30,7 @@ import pl.java.learning.todolist.infrastructure.persistence.BaseEntity;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@ToString(exclude = {"task", "category"})
+@ToString(exclude = {"task", "category", "roles"})
 public class User extends BaseEntity {
   private String login;
   private String password;
@@ -37,6 +43,15 @@ public class User extends BaseEntity {
   @JsonIgnore
   @OneToMany(mappedBy = "user")
   private List<Category> category;
+
+  @JsonIgnore
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "Users_Roles",
+      joinColumns = { @JoinColumn(name = "user_id") },
+      inverseJoinColumns = { @JoinColumn(name = "role_id") }
+  )
+  private Set<Role> roles;
 
   @NotNull(message = "Login  is required")
   @NotBlank(message = "Login is required")
