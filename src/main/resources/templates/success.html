@@ -10,20 +10,11 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="/js/fadeAnimation.js"></script>
-
-
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-    <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
-
+	<script src="/js/login.js"></script>
 
 	<script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/style.css">
-
-
 
 <script type="text/javascript">
 	$(window).load(function() {
@@ -36,9 +27,9 @@
 	<div id="background"></div>
 	<div id="header"> </div>
 
-	<div class="container multi-form-wrapper">
-		 <div class="form-container row">
-			<div id="main-login" class="module-form  col-xs-12 col-sm-5 col-md-5 col-lg-5">
+	<div class="container multi-form-wrapper mx-auto">
+		 <div class="form-container mx-auto row">
+			<div id="main-login" class="module-form mx-auto col-xs-12 col-sm-14 col-md-14 col-lg-14">
 
 
 
@@ -59,24 +50,24 @@
 			<form role="form"  name='f' action="login" method='POST' >
 
             <div class="form-group login">
-              <label for="Login"> <span class="glyphicon glyphicon-user"> </span> Login</label>
-        	  <input type="textbox" class="form-control form-element" name="username" placeholder="Login">
+              <label for="Login"> <span class="glyphicon glyphicon-user" > </span> Login</label>
+        	  <input type="textbox" autofocus class="form-control form-element" name="username" placeholder="Login">
             </div>
 
 
-            <div class="form-group password">
+            <div class="form-group password ">
               <label for="password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
 			  <input type="password" class="form-control form-element" name="password" placeholder="Password">
             </div>
-            <br>
-						  <div class=" p-30 mx-auto "><center>
+            <br><div class="mx-auto" >
+						  <div class="pl-3-35 pl-40-3 pl-lg-2-5  mx-auto pl-5" tyle="width: 200px;"><center>
 
 
 						<img src="/image/facebook.png" class="imgsize img-fluid m-10 " margin="10px" alt="">
 						<img src="/image/google.png" class="imgsize img-fluid " alt="">
 						<img src="/image/github.png" class="imgsize  img-fluid  m-10 " alt="">			</center>
-						  </div>        <br>        <br>
-			<input type="submit"  class="btn btn-default btn-success btn-block submit-btn login-btn"><span class="glyphicon glyphicon-lock"></span>&nbsp; Login</input>
+						  </div>        <br>        <br></div>
+			<input type="submit" class="btn btn-default btn-success btn-block submit-btn login-btn"><span class="glyphicon glyphicon-lock"></span>&nbsp; Login</input>
 
 
           </form>
@@ -90,66 +81,6 @@
 
 		</div>
 
-	 	<div class="col-sm-1"></div>
-	 	<div class="col-sm-1 "></div>
-		<div id="main-signup" class="module-form col-xs-12 col-sm-5 col-md-5 col-lg-5">
-
-
- 	<div class="form-content">
-        <div class="form-header background-maroon white">
-        	<div class="form-top-left">
-		          <h3>Signup</h3>
-		          <p> Be a part of TODO-list Community </p>
-		      </div>
-		      <div class="form-top-right">
-		      		<span class="glyphicon glyphicon-pencil"></span>
-		      </div>
-		      <br style="clear:both"/>
-        </div>
-
-        <div class="form-body">
-            <form class="needs-validation signupForm" id="signupForm" th:action="@{/success}" th:object="${user}" method="post">
-
-            <div class="form-group login">
-           <span class="glyphicon glyphicon-user"> </span> Login
-        	  <input type="textbox"  id="login" class="form-control login-validation form-element"  required th:field="*{login}"  name="username" placeholder="Login">
-            </div>
-
-
-            <div class="form-group password">
-            <span class="glyphicon glyphicon-eye-open"></span> Password
-			  <input  type="password" id="password" class="form-control password-validation form-element"  th:field="*{password}" name="password" placeholder="Password" data-validation="false">
-            </div>
-
-             <div class="form-group confirm-password">
-              <label for="confirm-password"><span class="glyphicon glyphicon-eye-open"></span> Confirm Password</label>
-			  <input  type="password"  id="cpassword" class="form-control password-confirmation form-element" name="password1" placeholder="Confirm Password" data-validation="false">
-            </div>
-						<div class="form-group email">
-							<label for="email"><span class="glyphicon glyphicon glyphicon-envelope"></span> Email</label>
-				<input  type="email" class="form-control password-validation form-element " th:field="*{email}"  id="email"  name="email" placeholder="email" data-validation="email">
-						</div>
-            <br>
-            <input id="submit"  onclick="testValid()" type="submit" class="btn btn-default btn-danger btn-block submit-btn signup-btn"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Signup </input>
-
-          </form>
-            <script>
-                $("#commentForm").validate();
-            </script>
-        </div>
-        <div class="modal-footer">
-
-          <!-- Message from serverside (basanth)-->
-          <div class="message pull-left" id="signup-message"></div>
-        </div>
-      </div>
-
-		</div>
-	</div>
-
-
-
-	</div>
 
 
 
@@ -163,7 +94,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4><span class="glyphicon glyphicon-lock"></span> Forgot Password</h4>
         </div>
-        <div class="modal-body" style="padding:40px 50px;">
+        <div class="modal-body x-auto" style="padding:40px 50px;">
           <form role="form">
             <div class="form-group">
               <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
@@ -188,16 +119,12 @@
 
     </div>
   </div>
-    <script src="/js/loginValidation.js"></script>
+
+
 
 </body>
 <div class="se-pre-con"></div>
 <script type="text/javascript">
-
-
-
-
-
 function headerAdjustment(){
 	if(window.innerWidth > 767){
 		$('#header').addClass('desktop-header').removeClass('mobile-header');

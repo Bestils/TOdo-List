@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends
-    pl.java.learning.todolist.infrastructure.persistence.Repository<User> {
+        pl.java.learning.todolist.infrastructure.persistence.Repository<User> {
 
-  User findByLogin(String login);
+    User findByLogin(String login);
 }

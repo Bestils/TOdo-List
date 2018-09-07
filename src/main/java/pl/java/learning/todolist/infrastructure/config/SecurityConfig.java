@@ -47,15 +47,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
           .headers().frameOptions().disable()
         .and()
           .authorizeRequests()
-          .antMatchers("/login*").anonymous()
-          .antMatchers("/webjars/**", "/js/*", "/css/*").permitAll()
+          .antMatchers("/login*", "/success*").anonymous()
+          .antMatchers("/css/*", "/webjars/**","/js/*","/image/*").permitAll()
           .anyRequest().authenticated()
         .and()
-          .formLogin()
+          .formLogin().loginPage("/login")
           .successForwardUrl("/tasks")
         .and()
           .logout()
           .logoutUrl("/logout")
-          .logoutSuccessUrl("/login");
+          .logoutSuccessUrl("/logout-success").permitAll();
   }
 }

@@ -34,6 +34,8 @@ public class UserService {
     return userRepository.findAll();
   }
 
+
+
   public void updateStatus(Long userId, boolean status) {
     User user = userRepository.findById(userId)
         .orElseThrow(() -> new UserNotFoundException(userId));
