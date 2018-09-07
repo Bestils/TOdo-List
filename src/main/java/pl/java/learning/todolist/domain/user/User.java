@@ -35,6 +35,7 @@ public class User extends BaseEntity {
   private String login;
   private String password;
   private String email;
+  private Boolean enabled;
 
   @JsonIgnore
   @OneToMany(mappedBy = "user")
@@ -55,16 +56,18 @@ public class User extends BaseEntity {
 
   @NotNull(message = "Login  is required")
   @NotBlank(message = "Login is required")
-  @Pattern(regexp = "[A-Za-z\\d]{5,255}$", message = "Login has invalid characters")
+  @Pattern(regexp = "[A-Za-z\\d]{4,255}$", message = "Login has invalid characters")
   public String getLogin() {
     return login;
   }
+
   @NotNull(message = "Password is required")
   @NotBlank(message = "Password is required")
-  @Pattern(regexp ="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])[A-Za-z\\d$@$!%*?&]{8,}" , message = "Password  has invalid characters")
+  @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$" , message = "Password  has invalid characters")
   public String getPassword() {
     return password;
   }
+
   @NotNull(message="Email Address is required")
   @NotBlank(message="Email Address is required")
   @Email(message = "Email address has invalid format")
@@ -72,9 +75,7 @@ public class User extends BaseEntity {
     return email;
   }
 
-
   public void setLogin(String login) {
     this.login = login;
   }
-
 }

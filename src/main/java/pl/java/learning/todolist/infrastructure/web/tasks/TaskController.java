@@ -41,7 +41,6 @@ public class TaskController {
 
   @GetMapping
   public String findAll(Model model) {
-
     model.addAttribute("categories", categoryService.findCategoriesByUserId(idProvider.getCurrentUserId()));
     model.addAttribute("task", new Task());
 
