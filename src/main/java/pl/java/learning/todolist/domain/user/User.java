@@ -63,7 +63,7 @@ public class User extends BaseEntity {
 
   @NotNull(message = "Password is required")
   @NotBlank(message = "Password is required")
-  @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{6,}$" , message = "Password  has invalid characters")
+  @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{6,}$" , message = "Password  has invalid characters")
   public String getPassword() {
     return password;
   }

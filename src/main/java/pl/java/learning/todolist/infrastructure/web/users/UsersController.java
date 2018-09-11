@@ -21,7 +21,6 @@ public class UsersController {
 
   private final UserService userService;
 
-
   @GetMapping(PATH_USERS_REGISTER)
   public String userForm(Model model) {
     model.addAttribute("user", new User());

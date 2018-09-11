@@ -37,15 +37,6 @@ public class CategoryService {
 
   public void deleteById(Long id) {
     categoryRepository.findById(id).orElseThrow(() -> new CategoryNotFoundException(id));
-
-
-    //todo to jest do poprawy
-    categoryRepository.findById(id)
-          .filter(category -> id != 1)
-          .orElseThrow(() -> new CategoryNotFoundException(id))
-          .getTasks()
-          .forEach(task -> task.setCategory(categoryRepository.findById(1L).get()));
-
     categoryRepository.deleteById(id);
   }
 
