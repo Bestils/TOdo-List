@@ -48,7 +48,7 @@ public class User extends BaseEntity {
   @NotBlank(message = "Email Address is required")
   @Email(message = "Email address has invalid format")
   private String email;
-  private Boolean enabled;
+
   private Boolean enabled = true;
 
   @JsonIgnore

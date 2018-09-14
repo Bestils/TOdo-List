@@ -35,7 +35,7 @@ $( document ).ready( function () {
             password: {
                 required: "Please provide a password",
                 minlength: "Your password must be at least 5 characters long",
-                regex :" Pojebalo cie kurwa szmato pierdolona ? Wymyśl coś trudniejszego"
+                regex :" Takie hasła to ja na śniadania zjadam ? Wymyśl coś trudniejszego"
             },
             confirm_password: {
                 required: "Please provide a password",
