@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.java.learning.todolist.domain.category.Category;
 import pl.java.learning.todolist.domain.category.CategoryService;
 import pl.java.learning.todolist.domain.task.Task;
 import pl.java.learning.todolist.domain.task.TaskService;
@@ -36,13 +37,13 @@ public class TaskController {
 
   private final TaskService taskService;
   private final CategoryService categoryService;
-  private final UserService userService;
   private final IdProvider idProvider;
 
   @GetMapping
   public String findAll(Model model) {
     model.addAttribute("categories", categoryService.findCategoriesByUserId(idProvider.getCurrentUserId()));
     model.addAttribute("task", new Task());
+    model.addAttribute("category", new Category());
 
     return TASKS_ALL;
   }
@@ -64,8 +65,7 @@ public class TaskController {
     if (bindingResult.hasErrors()) {
       return redirectTo("/tasks");
     }
-    task.setUser(userService.getById(idProvider.getCurrentUserId()));
-    taskService.save(task);
+    taskService.createForUser(task, idProvider.getCurrentUserId());
     return redirectTo("/tasks");
   }
 

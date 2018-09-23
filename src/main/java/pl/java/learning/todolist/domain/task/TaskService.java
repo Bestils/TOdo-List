@@ -2,9 +2,11 @@ package pl.java.learning.todolist.domain.task;
 
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
+import pl.java.learning.todolist.domain.user.UserService;
 
 @Slf4j
 @Transactional
@@ -12,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TaskService {
 
   private final TaskRepository taskRepository;
+  private final UserService userService;
 
   public List<Task> findAll() {
     return taskRepository.findAll();
@@ -51,6 +54,11 @@ public class TaskService {
         .ifPresent(that::setPriority);
 
     save(that);
+  }
+
+  public Task createForUser(@Valid Task task, Long currentUserId) {
+    task.setUser(userService.getById(currentUserId));
+    return taskRepository.save(task);
   }
 }
 

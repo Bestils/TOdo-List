@@ -4,6 +4,7 @@
   <title>Task List</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+  <link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
 
@@ -14,6 +15,12 @@
       </li>
       <li sec:authorize="hasRole('ADMIN')">
          <a class="nav-link" th:href="@{/admin}">Admin Panel</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModal">Add task</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModalCategory">Add category</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" th:href="@{/logout}">Logout</a>
@@ -41,12 +48,8 @@
     </div>
   </div>
 
+  <!-- Add new task -->
   <div class="container">
-  <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
-      Add task
-    </button>
-
     <div class="myForm">
       <form th:action="@{/tasks}" method="post" th:object="${task}">
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -99,6 +102,42 @@
         </form>
       </div>
   </div>
+
+  <!-- Add new category -->
+  <div class="container">
+      <div class="myFormCategory">
+        <form th:action="@{/category}" method="post" th:object="${category}">
+          <div class="modal fade" id="exampleModalCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelCategory" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Add category</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body">
+
+                  <div class="form-group">
+                    <label for="name" class="col-form-label">Name</label>
+                    <input type="text" id="name" name="name" class="form-control" th:field="*{name}" required />
+                  </div>
+
+                </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <input type="submit" class="btn btn-primary" value="Submit" />
+                </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+    </div>
 
   <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
   <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
