@@ -77,7 +77,7 @@ public class TaskController {
 
     taskService.updateTask(task);
 
-    return redirectTo(TASKS_ALL);
+    return redirectTo("/tasks");
   }
 
   @PostMapping("delete")

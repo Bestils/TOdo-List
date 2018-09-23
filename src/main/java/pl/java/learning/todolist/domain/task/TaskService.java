@@ -53,6 +53,9 @@ public class TaskService {
     Optional.ofNullable(task.getPriority())
         .ifPresent(that::setPriority);
 
+    Optional.ofNullable(task.getFinished())
+        .ifPresent(that::setFinished);
+
     save(that);
   }
 
