@@ -37,8 +37,8 @@ public class CategoryRestController {
   }
 
   @PatchMapping
-  public void editCategory(@RequestBody Category category) {
-    categoryService.edit(category);
+  public void updateCategory(@RequestBody Category category) {
+    categoryService.updateCategory(category);
   }
 
   @DeleteMapping("{id}")

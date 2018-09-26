@@ -2,7 +2,12 @@ package pl.java.learning.todolist.infrastructure.rest;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.java.learning.todolist.domain.task.Task;
 import pl.java.learning.todolist.domain.task.TaskService;
+import pl.java.learning.todolist.infrastructure.security.IdProvider;
 
 @RestController
 @RequestMapping("/api/tasks")
@@ -21,12 +27,11 @@ import pl.java.learning.todolist.domain.task.TaskService;
 public class TaskRestController {
 
   private final TaskService taskService;
+  private final IdProvider idProvider;
 
   @GetMapping
-  public List<Task> findAll(@RequestParam(value = "finished", required = false) Boolean status) {
-    return Optional.ofNullable(status)
-        .map(taskService::findByStatus)
-        .orElse(taskService.findAll());
+  public List<Task> findTasksByUserId() {
+    return taskService.findTasksBelongToUser(idProvider.getCurrentUserId());
   }
 
   @GetMapping("{id}")
@@ -36,21 +41,21 @@ public class TaskRestController {
 
   @GetMapping("/status")
   public List<Task> getFinishedTasks(@RequestParam(value = "finished", defaultValue = "true") Boolean status) {
-    return taskService.findByStatus(status);
+    return taskService.findByStatus(status, idProvider.getCurrentUserId());
   }
 
   @PostMapping
   public Task addTask(@RequestBody Task task) {
-    return taskService.save(task);
+    return taskService.save(task, idProvider.getCurrentUserId());
   }
 
   @PatchMapping
   public void updateTask(@RequestBody Task task) {
-    taskService.updateTask(task);
+    taskService.updateTask(task, idProvider.getCurrentUserId());
   }
 
   @DeleteMapping("{id}")
   public void deleteTask(@PathVariable Long id) {
-    taskService.deleteById(id);
+      taskService.deleteById(id, idProvider.getCurrentUserId());
   }
 }

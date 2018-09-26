@@ -44,7 +44,6 @@ public class TaskController {
     model.addAttribute("categories", categoryService.findCategoriesByUserId(idProvider.getCurrentUserId()));
     model.addAttribute("task", new Task());
     model.addAttribute("category", new Category());
-
     return TASKS_ALL;
   }
 
@@ -74,15 +73,13 @@ public class TaskController {
     if (bindingResult.hasErrors()) {
       return TASK_EDIT_FORM;
     }
-
-    taskService.updateTask(task);
-
+    taskService.updateTask(task, idProvider.getCurrentUserId());
     return redirectTo("/tasks");
   }
 
   @PostMapping("delete")
   public String deleteTask(@RequestBody Long id) {
-    taskService.deleteById(id);
+    taskService.deleteById(id, idProvider.getCurrentUserId());
     return redirectTo(TASKS_ALL);
   }
 }

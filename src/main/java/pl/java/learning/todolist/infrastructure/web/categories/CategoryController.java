@@ -1,4 +1,4 @@
-package pl.java.learning.todolist.infrastructure.web.tasks;
+package pl.java.learning.todolist.infrastructure.web.categories;
 
 import static pl.java.learning.todolist.infrastructure.web.WebUtils.redirectTo;
 

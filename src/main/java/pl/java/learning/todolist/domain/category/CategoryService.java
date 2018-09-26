@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.java.learning.todolist.domain.user.UserService;
 
@@ -30,11 +31,12 @@ public class CategoryService {
     return categoryRepository.save(category);
   }
 
-  public void edit(Category category) {
+  public void updateCategory(Category category) {
     Category existCategory = categoryRepository.findById(category.getId())
         .orElseThrow(() -> new CategoryNotFoundException(category.getId()));
 
-    Optional.ofNullable(category.getName()).ifPresent(existCategory::setName);
+    Optional.ofNullable(category.getName())
+        .ifPresent(existCategory::setName);
 
     save(category);
   }

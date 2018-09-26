@@ -1,5 +1,8 @@
 package pl.java.learning.todolist.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
@@ -33,15 +36,18 @@ import pl.java.learning.todolist.infrastructure.persistence.BaseEntity;
 @EqualsAndHashCode(callSuper = true)
 @ToString(exclude = {"task", "category", "roles"})
 public class User extends BaseEntity {
+
   @Column(name = "login", nullable = false, unique = true)
   @NotNull(message = "Login  is required")
   @NotBlank(message = "Login is required")
   @Pattern(regexp = "[A-Za-z\\d]{4,255}$", message = "Login has invalid characters")
   private String login;
 
+
   @NotNull(message = "Password is required")
   @NotBlank(message = "Password is required")
   @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{6,}$", message = "Password  has invalid characters")
+  @JsonProperty(access = Access.WRITE_ONLY)
   private String password;
 
   @NotNull(message = "Email Address is required")
@@ -52,11 +58,11 @@ public class User extends BaseEntity {
   private Boolean enabled = true;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "user")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
   private List<Task> task;
 
   @JsonIgnore
-  @OneToMany(mappedBy = "user")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
   private List<Category> category;
 
   @JsonIgnore
@@ -67,5 +73,4 @@ public class User extends BaseEntity {
           inverseJoinColumns = {@JoinColumn(name = "role_id")}
   )
   private Set<Role> roles;
-
 }

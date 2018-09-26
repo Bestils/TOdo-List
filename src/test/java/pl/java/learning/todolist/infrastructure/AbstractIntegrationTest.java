@@ -21,7 +21,9 @@ public abstract class AbstractIntegrationTest {
 
   @Before
   public void setup() {
-    mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+    mockMvc = MockMvcBuilders.
+        webAppContextSetup(wac)
+        .build();
   }
 
   public String url(String format, Object... params) {

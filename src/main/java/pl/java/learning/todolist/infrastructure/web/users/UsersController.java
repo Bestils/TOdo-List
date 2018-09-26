@@ -24,16 +24,11 @@ public class UsersController {
 
   private final UserService userService;
 
-@Autowired
- private final PasswordEncoder passwordEncoder;
-
-
   @GetMapping(PATH_USERS_REGISTER_AND_LOGIN)
   public String userForm(Model model) {
     model.addAttribute("user", new User());
     return "login";
   }
-
 
   @GetMapping(PATH_USERS_SUCCESS)
   public String userLoginPage() {
@@ -42,8 +37,7 @@ public class UsersController {
 
   @PostMapping(PATH_USERS_SUCCESS)
   public String successSubmit(@ModelAttribute User user) {
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-    userService.saveOrUpdateUser(user);
+    userService.createUser(user);
     return "success";
   }
 

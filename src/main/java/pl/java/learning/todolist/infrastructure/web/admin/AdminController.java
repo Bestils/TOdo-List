@@ -22,11 +22,11 @@ import pl.java.learning.todolist.domain.user.UserService;
 @Slf4j
 @RequestMapping(ADMIN)
 @Controller
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
   private final UserService userService;
 
-  @PreAuthorize("hasRole('ADMIN')")
   @GetMapping
   public String panelAdmin(Model model) {
     model.addAttribute("users", userService.findAll());
