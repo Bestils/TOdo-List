@@ -13,13 +13,14 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString(exclude = {"tasks", "user"})
 public class Category extends BaseEntity {
     private String name;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "category")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OrderColumn(name = "position")
     private List<Task> tasks;
 
     @ManyToOne

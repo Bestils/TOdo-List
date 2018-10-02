@@ -58,4 +58,11 @@ public class TaskRestController {
   public void deleteTask(@PathVariable Long id) {
       taskService.deleteById(id, idProvider.getCurrentUserId());
   }
+
+  @PostMapping("/change")
+  public void changePositionInLists(@RequestParam("taskId") Long taskId,
+      @RequestParam("newPositionInList") Long newPositionInList,
+      @RequestParam("newCategoryId") Long newCategoryId) {
+    taskService.changeCategory(taskId, newCategoryId, newPositionInList);
+  }
 }

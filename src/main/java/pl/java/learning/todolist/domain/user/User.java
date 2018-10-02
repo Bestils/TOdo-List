@@ -73,4 +73,9 @@ public class User extends BaseEntity {
           inverseJoinColumns = {@JoinColumn(name = "role_id")}
   )
   private Set<Role> roles;
+
+  public void addTask(Task task) {
+    this.task.add(task);
+  }
+
 }

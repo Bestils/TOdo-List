@@ -1,3 +1,9 @@
+.frameForTask {
+	border: 1px solid #eee;
+	width: 100%;
+	min-height: 200px;
+}
+
 .invalid-field{
 	background-color:#B6334C !important;
 	color:white;
@@ -6,7 +12,6 @@
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
-
 
 .valid-field{
 	background-color:transparent;

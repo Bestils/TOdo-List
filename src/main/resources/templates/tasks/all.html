@@ -35,9 +35,11 @@
     </div>
 
     <div class="row mt-1">
-      <div th:each="category : ${categories}" class="col-sm">
-          <h2 th:text="${category.name}" class="bg-primary text-white text-center p-1" />
-           <div th:each="task : ${category.tasks}" >
+      <div id="sortableCategories" th:each="category : ${categories}" class="col-sm">
+        <div th:id="${category.name}" th:value="${category.id}" class="connectedSortable">
+          <h2 id="titleCategory" th:text="${category.name}" class="bg-primary text-white text-center p-1" />
+
+           <div th:id="${task.id}" th:each="task : ${category.tasks}">
              <div class="border border-warning mb-1">
                 <span class="badge badge-pill badge-warning float-right mt-1 mr-1" th:text="${task.priority}"></span>
                 <input type="checkbox" th:onclick="|changeStatusFinished('${task.id}')|" th:checked="${task.finished}" th:value="${task.id}" />
@@ -45,6 +47,8 @@
                 <p th:text="${task.description}"></p>
              </div>
            </div>
+
+         </div>
       </div>
     </div>
   </div>
@@ -142,7 +146,9 @@
 
   <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
   <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="js/handlersCheckbox.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="js/handlersEventInTasks.js"></script>
 
 </body>
 </html>

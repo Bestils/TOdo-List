@@ -1,5 +1,7 @@
 package pl.java.learning.todolist.domain.task;
 
+import static java.lang.Math.toIntExact;
+
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -7,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.transaction.annotation.Transactional;
+import pl.java.learning.todolist.domain.category.Category;
+import pl.java.learning.todolist.domain.category.CategoryService;
+import pl.java.learning.todolist.domain.user.User;
 import pl.java.learning.todolist.domain.user.UserService;
 
 @Slf4j
@@ -16,6 +21,7 @@ public class TaskService {
 
   private final TaskRepository taskRepository;
   private final UserService userService;
+  private final CategoryService categoryService;
 
   public List<Task> findTasksBelongToUser(Long idUser) {
     return taskRepository.findTasksByUserId(idUser);
@@ -66,7 +72,10 @@ public class TaskService {
     task.setUser(userService.getById(currentUserId));
     return taskRepository.save(task);
   }
+
+  public void changeCategory(Long taskId, Long categoryId, Long positionInCategory) {
+    Task that = taskRepository.findById(taskId)
+        .orElseThrow(() -> new TaskNotFoundException(taskId));
+    that.updateCategory(categoryService.findById(categoryId), toIntExact(positionInCategory));
+  }
 }
-
-
-

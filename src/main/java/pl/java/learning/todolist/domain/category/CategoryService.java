@@ -50,5 +50,4 @@ public class CategoryService {
     category.setUser(userService.getById(currentUserId));
     return categoryRepository.save(category);
   }
-
 }

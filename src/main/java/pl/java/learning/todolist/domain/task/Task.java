@@ -39,4 +39,18 @@ public class Task extends BaseEntity {
   @ManyToOne
   @JoinColumn(name ="user_id")
   private User user;
+
+  public void updateCategory(Category category, int position) {
+    if(getCategory() != null)
+      this.category.getTasks().remove(this);
+    this.category = category;
+    this.category.getTasks().add(position, this);
+  }
+
+  public void updateUser(User user) {
+    if(getUser() != null)
+      this.user.getTask().remove(this);
+    this.user = user;
+    this.user.addTask(this);
+  }
 }
