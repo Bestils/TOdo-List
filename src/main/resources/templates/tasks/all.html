@@ -3,37 +3,14 @@
 <head>
   <title>Task List</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <link href="webjars/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-  <link th:href="@{/css/style.css}" rel="stylesheet" />
+  <div th:replace="fragments/header :: header-includes" />
 </head>
 <body>
-
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" >
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" th:href="@{/tasks}">Dashboard</a>
-      </li>
-      <li sec:authorize="hasRole('ADMIN')">
-         <a class="nav-link" th:href="@{/admin}">Admin Panel</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModal">Add task</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link btn" data-toggle="modal" data-target="#exampleModalCategory">Add category</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/logout}">Logout</a>
-      </li>
-    </ul>
-  </nav>
-
+  <div th:replace="fragments/header :: navbar" />
   <div class="container">
-
     <div class="text-center">
       <h1>My To-Do List</h1>
     </div>
-
     <div class="row mt-1">
       <div id="sortableCategories" th:each="category : ${categories}" class="col-sm">
         <div th:id="${category.name}" th:value="${category.id}" class="connectedSortable">
@@ -52,103 +29,8 @@
       </div>
     </div>
   </div>
-
-  <!-- Add new task -->
-  <div class="container">
-    <div class="myForm">
-      <form th:action="@{/tasks}" method="post" th:object="${task}">
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add task</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-
-              <div class="modal-body">
-
-                <div class="form-group">
-                  <label for="name" class="col-form-label">Name</label>
-                  <input type="text" id="name" name="name" class="form-control" th:field="*{name}" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="description" class="col-form-label">Description</label>
-                  <input type="text" class="form-control" id="description" name="description" th:field="*{description}" required />
-                </div>
-
-                <div class="form-group">
-                  <label for="priority" class="col-form-label">Priority</label>
-                  <input type="number" min="0" class="form-control" id="priority" name="priority" th:field="*{priority}" />
-                </div>
-
-                <div class="form-group">
-                  <label for="category.id" class="col-form-label">Category</label>
-                  <select th:field="*{category}">
-                    <option th:each="category : ${categories}"
-                       th:value="${category.id}"
-                       th:text="${category.name}"/>
-                  </select>
-                </div>
-
-              </div>
-
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <input type="submit" class="btn btn-primary" value="Submit" />
-              </div>
-
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-  </div>
-
-  <!-- Add new category -->
-  <div class="container">
-      <div class="myFormCategory">
-        <form th:action="@{/category}" method="post" th:object="${category}">
-          <div class="modal fade" id="exampleModalCategory" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelCategory" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Add category</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-
-                <div class="modal-body">
-
-                  <div class="form-group">
-                    <label for="name" class="col-form-label">Name</label>
-                    <input type="text" id="name" name="name" class="form-control" th:field="*{name}" required />
-                  </div>
-
-                </div>
-
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <input type="submit" class="btn btn-primary" value="Submit" />
-                </div>
-
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-    </div>
-
-  <script src="webjars/jquery/3.3.1/jquery.min.js"></script>
-  <script src="webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script type="text/javascript" src="js/handlersEventInTasks.js"></script>
-
+  <div th:replace="fragments/addtask :: addTask" />
+  <div th:replace="fragments/addcategory :: addCategory" />
+  <div th:replace="fragments/footer :: footer" />
 </body>
 </html>
