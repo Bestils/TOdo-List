@@ -18,10 +18,14 @@
 
            <div th:id="${task.id}" th:each="task : ${category.tasks}">
              <div class="border border-warning mb-1">
-                <span class="badge badge-pill badge-warning float-right mt-1 mr-1" th:text="${task.priority}"></span>
-                <input type="checkbox" th:onclick="|changeStatusFinished('${task.id}')|" th:checked="${task.finished}" th:value="${task.id}" />
+                <a href="#" class="close-classic float-right mt-1 mr-1"></a>
+                <span class="badge badge-pill badge-warning float-left mt-1 ml-1" th:text="${task.priority}"></span>
                 <h3 th:text="${task.name}" class="text-center"/>
                 <p th:text="${task.description}"></p>
+                <div class="round text-center">
+                  <input th:id="task + ${task.id}" type="checkbox" th:onclick="|changeStatusFinished('${task.id}')|" th:checked="${task.finished}" th:value="${task.id}" />
+                  <label th:for="task + ${task.id}"></label>
+                </div>
              </div>
            </div>
 
