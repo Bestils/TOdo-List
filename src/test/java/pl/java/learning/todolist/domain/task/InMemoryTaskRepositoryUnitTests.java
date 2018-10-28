@@ -39,9 +39,9 @@ public class InMemoryTaskRepositoryUnitTests {
     admin.setId(new Long(1));
     user.setId(new Long(2));
 
-    Task firstTask = new Task("taskOne", "some description", 5, false, null, admin);
-    Task secondTask = new Task("taskTwo", "some description 2", 8, false, null, admin);
-    Task thirdTask = new Task("taskThird", "some description 3", 4, false, null, user);
+    Task firstTask = new Task("taskOne", "some description", 5, false, null, admin, 0);
+    Task secondTask = new Task("taskTwo", "some description 2", 8, false, null, admin, 0);
+    Task thirdTask = new Task("taskThird", "some description 3", 4, false, null, user, 0);
 
     taskRepository.save(firstTask);
     taskRepository.save(secondTask);
@@ -59,7 +59,7 @@ public class InMemoryTaskRepositoryUnitTests {
 
     //given
     User userInTest = new User("admin", "password", "admin@admin.com", true, null, null, null);
-    Task taskForUser = new Task("task", "some description", 5, false, null, userInTest);
+    Task taskForUser = new Task("task", "some description", 5, false, null, userInTest, 0);
     userInTest.setId(new Long(1));
     taskRepository.save(taskForUser);
 
@@ -78,9 +78,9 @@ public class InMemoryTaskRepositoryUnitTests {
     user.setId(new Long(1));
     admin.setId(new Long(2));
 
-    Task firstTask = new Task("taskOne", "some description", 5, true, null, admin);
-    Task secondTask = new Task("taskTwo", "some description 2", 8, true, null, user);
-    Task thirdTask = new Task("taskThird", "some description 3", 4, true, null, user);
+    Task firstTask = new Task("taskOne", "some description", 5, true, null, admin, 0);
+    Task secondTask = new Task("taskTwo", "some description 2", 8, true, null, user, 0);
+    Task thirdTask = new Task("taskThird", "some description 3", 4, true, null, user, 0);
 
     taskRepository.save(firstTask);
     taskRepository.save(secondTask);

@@ -1,3 +1,7 @@
 spring:
   flyway:
     locations: classpath:/db/migration
+  social:
+      facebook:
+        app-id: 111638156408802
+        app-secret: 3b017e7c110cb2839557c37f27de2a50

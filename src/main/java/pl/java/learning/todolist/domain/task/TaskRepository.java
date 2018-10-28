@@ -9,4 +9,5 @@ public interface TaskRepository extends pl.java.learning.todolist.infrastructure
     Optional<Task> findByIdAndUserId(Long taskId, Long userId);
     List<Task> findTasksByUserId(Long userId);
     List<Task> findTasksByFinishedAndUserId(Boolean status, Long userId);
+    List<Task> findTasksByCategoryNameAndUserIdOrderByPositionAsc(String categoryName, Long userId);
 }

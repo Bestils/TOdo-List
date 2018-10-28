@@ -40,6 +40,8 @@ public class Task extends BaseEntity {
   @JoinColumn(name ="user_id")
   private User user;
 
+  private int position;
+
   public void updateCategory(Category category, int position) {
     if(getCategory() != null)
       this.category.getTasks().remove(this);

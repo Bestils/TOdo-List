@@ -24,6 +24,9 @@ public class UsersController {
 
   private final UserService userService;
 
+@Autowired
+ private final PasswordEncoder passwordEncoder;
+
   @GetMapping(PATH_USERS_REGISTER_AND_LOGIN)
   public String userForm(Model model) {
     model.addAttribute("user", new User());

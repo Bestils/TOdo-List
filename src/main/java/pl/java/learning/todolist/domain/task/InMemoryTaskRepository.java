@@ -38,4 +38,12 @@ public class InMemoryTaskRepository
         .filter(task -> task.getFinished().equals(status))
         .collect(Collectors.toList());
   }
+
+  @Override
+  public List<Task> findTasksByCategoryNameAndUserIdOrderByPositionAsc(String categoryName, Long userId) {
+    return findAll().stream()
+        .filter(task -> task.getCategory().getName() == categoryName)
+        .filter(task -> task.getUser().getId() == userId)
+        .collect(Collectors.toList());
+  }
 }

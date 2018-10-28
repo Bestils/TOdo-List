@@ -70,7 +70,13 @@ public class TaskService {
 
   public Task createForUser(@Valid Task task, Long currentUserId) {
     task.setUser(userService.getById(currentUserId));
+    task.setPosition(getNextPositionForTask(task.getCategory().getName(), currentUserId));
     return taskRepository.save(task);
+  }
+
+  private int getNextPositionForTask(String categoryName, Long userId) {
+    List<Task> tasks = taskRepository.findTasksByCategoryNameAndUserIdOrderByPositionAsc(categoryName, userId);
+    return tasks.size() != 0 ? (tasks.get(tasks.size() - 1).getPosition() + 1) : 0;
   }
 
   public void changeCategory(Long taskId, Long categoryId, Long positionInCategory) {

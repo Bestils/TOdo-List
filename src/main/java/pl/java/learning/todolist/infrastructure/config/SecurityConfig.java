@@ -1,7 +1,8 @@
 package pl.java.learning.todolist.infrastructure.config;
 
-
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -12,7 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.social.security.SpringSocialConfigurer;
+import pl.java.learning.todolist.domain.user.UserRepository;
 import pl.java.learning.todolist.infrastructure.security.MyUserDetailsService;
+import pl.java.learning.todolist.infrastructure.security.SimpleSocialUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -21,6 +25,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired
   private MyUserDetailsService userDetailsService;
+
+  @Autowired
+  private DataSource dataSource;
+
+  @Autowired
+  private UserRepository userRepository;
 
   @Override
   protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
@@ -41,6 +51,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Override
+  protected MyUserDetailsService userDetailsService() {
+    return userDetailsService;
+  }
+
+  @Bean
+  public SimpleSocialUserDetailsService simpleSocialUserDetailsService() {
+    return new SimpleSocialUserDetailsService(userRepository);
+  }
+
+  @Override
   protected void configure(final HttpSecurity http) throws Exception {
     http
         .csrf().disable()
@@ -48,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
           .authorizeRequests()
           .antMatchers("/login*", "/success*").anonymous()
-          .antMatchers("/css/*", "/webjars/**","/js/*","/image/*").permitAll()
+          .antMatchers("/auth/**", "/signup/**", "/css/*", "/webjars/**","/js/*","/image/*").permitAll()
           .anyRequest().authenticated()
         .and()
           .formLogin().loginPage("/login")
@@ -56,6 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
           .logout()
           .logoutUrl("/logout")
-          .logoutSuccessUrl("/logout-success").permitAll();
+          .logoutSuccessUrl("/logout-success").permitAll()
+        .and()
+          .apply(new SpringSocialConfigurer());
   }
 }
