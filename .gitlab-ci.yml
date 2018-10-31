@@ -10,7 +10,7 @@ stages:
   - build
 
 maven-build:
-  image: maven:3-jdk-8
+  image: maven:3-jdk-9
   stage: build
   script: "mvn package -B"
   artifacts:
